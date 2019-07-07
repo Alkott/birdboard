@@ -15,12 +15,13 @@ class ProjectsController extends Controller
 
     public function store()
     {
+
         $attrs = request()->validate([
             'title' => 'required',
             'description' => 'required'
         ]);
 
-        Project::create($attrs);
+        auth()->user()->projects()->create($attrs);
         return redirect('/projects');
     }
 

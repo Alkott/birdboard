@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ProjectTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /** @test */
     public function it_as_a_path()
     {

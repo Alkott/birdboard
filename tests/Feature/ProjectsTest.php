@@ -22,6 +22,7 @@ class ProjectsTest extends TestCase
     public function guests_can_not_view_a_projects()
     {
         $this->get('/projects')->assertRedirect('login');
+        $this->get('/projects/create')->assertRedirect('login');
     }
 
     /** @test */
@@ -37,6 +38,8 @@ class ProjectsTest extends TestCase
         $this->withExceptionHandling();
 
         $this->actingAs(factory('App\User')->create());
+
+        $this->get('/projects/create')->assertStatus(200);
 
         $attributes = [
             'title' => $this->faker->sentence,
@@ -74,8 +77,6 @@ class ProjectsTest extends TestCase
     {
         $this->be(factory('App\User')->create());
         $project = factory('App\Project')->create();
-
-
 
         $this->get($project->path())->assertStatus(403);
     }
